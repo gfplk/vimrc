@@ -1,0 +1,12 @@
+$ mysql -u root -p
+>> use mysql;
+>> update user set host='%' where user='ichunt';
+>> grant all privileges on 'rochester'.* to 'ichunt'@'%' identified by 'ichunt';
+>> flush privileges;
+>> exit
+
+# replace the bind_address line # bind_address  = localhost
+$ vi /etc/mysql/mysql.conf.d/mysqld.cnf
+# bind_address = localhost
+:wq!
+$ service mysql restart
