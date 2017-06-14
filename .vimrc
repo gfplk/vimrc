@@ -12,6 +12,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Yggdroot/indentLine'
 Plugin 'majutsushi/tagbar'
+Plugin 'tell-k/vim-autopep8'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -21,7 +22,6 @@ color Monokai
 set nu
 set sw=4 ts=4 sts=4 expandtab
 set laststatus=2
-set go=m
 set showcmd
 set nobackup
 set cursorline
@@ -38,19 +38,20 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:indentLine_color_gui = '#A4E57E'
 set autoindent
+set cindent
 set linespace=0
+set ambiwidth=double
+set nowrap
 
 set fileencodings=utf-8,gbk,chinese,cp936 
-set termencoding=utf-8
 set encoding=prc
 let &termencoding=&encoding
-set gfn=Monaco:h10:cANSI
-set gfw=NSimsun:h12
-
+set termencoding=utf-8
 
 map <F2> :NERDTreeToggle<CR>
 nmap <F3> :TagbarToggle<CR>
 map <F5> :call Run()<CR>
+autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
 func! Run()
     if &filetype == 'python'
