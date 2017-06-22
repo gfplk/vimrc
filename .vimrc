@@ -15,12 +15,12 @@ Plugin 'majutsushi/tagbar'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/TxtBrowser'
+Plugin 'fatih/vim-go'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 syntax on
-"set nu
 set sw=4 ts=4 sts=4 expandtab
 set laststatus=2
 set showcmd
@@ -49,13 +49,16 @@ set termencoding=utf-8
 
 map <F2> :NERDTreeToggle<CR>
 nmap <F3> :TagbarToggle<CR>
-map <F5> :call Run()<CR>
 nnoremap <silent> <F4> :TlistToggle<CR>
-autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+map <F5> :call Run()<CR>
+autocmd FileType python noremap <buffer> <F6> :call Autopep8()<CR>
 
 func! Run()
     if &filetype == 'python'
         exec "!python3 %"
+    endif
+    if &filetype == 'go'
+        exec "!go run %"
     endif
 endfunc
 
