@@ -55,10 +55,10 @@ autocmd FileType python noremap <buffer> <F6> :call Autopep8()<CR>
 
 func! Run()
     if &filetype == 'python'
-        exec "!python3 %"
+        exec "!time python3 %"
     endif
     if &filetype == 'go'
-        exec "!go run %"
+        exec "!time go run %"
     endif
 endfunc
 
