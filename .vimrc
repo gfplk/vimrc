@@ -52,6 +52,8 @@ nmap <F3> :TagbarToggle<CR>
 nnoremap <silent> <F4> :TlistToggle<CR>
 map <F5> :call Run()<CR>
 autocmd FileType python noremap <buffer> <F6> :call Autopep8()<CR>
+map <F7> :exec "%!xxd"<CR>
+map <F8> :exec "%!xxd -r"<CR>
 
 func! Run()
     if &filetype == 'python'
