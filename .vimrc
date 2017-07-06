@@ -31,7 +31,7 @@ set noswapfile
 set ignorecase
 set linespace=0
 set showmatch
-let NERDTreeIgnore=['\.pyc','\~$','\.swp'] 
+let NERDTreeIgnore=['\.pyc','\~$','\.swp', '__pycache__'] 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -39,7 +39,7 @@ set autoindent
 set cindent
 set linespace=0
 set ambiwidth=double
-set nowrap
+" set nowrap
 
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
 set fileencoding=utf-8
