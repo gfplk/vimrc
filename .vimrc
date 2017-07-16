@@ -1,4 +1,3 @@
-" set titlestring=Faded
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -13,8 +12,6 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'Yggdroot/indentLine'
 Plugin 'majutsushi/tagbar'
 Plugin 'tell-k/vim-autopep8'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/TxtBrowser'
 Plugin 'fatih/vim-go'
 
 call vundle#end()            " required
