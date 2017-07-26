@@ -54,10 +54,10 @@ map <F8> :exec "%!xxd -r"<CR>
 
 func! Run()
     if &filetype == 'python'
-        exec "!time python3 %"
+        exec "!python %"
     endif
     if &filetype == 'go'
-        exec "!time go run %"
+        exec "!go run %"
     endif
 endfunc
 
