@@ -54,15 +54,19 @@ map <F8> :exec "%!xxd -r"<CR>
 
 func! Run()
     if &filetype == 'python'
-        exec "!python %"
+        if has("win32")
+            exec "!python3 %"
+        else
+            exec "!python %"
+        endif
     endif
+
     if &filetype == 'go'
         exec "!go run %"
     endif
 endfunc
 
 set foldmethod=indent
-au BufEnter *.txt setlocal ft=txt
 
 let Tlist_Show_One_File = 1            "不同时显示多个文件的tag，只显示当前文件的
 let Tlist_Exit_OnlyWindow = 1          "如果taglist窗口是最后一个窗口，则退出vim
@@ -73,18 +77,16 @@ color Monokai
 set fenc=chinese
 
  "处理文本中显示乱码
- set encoding=utf-8
- set fileencodings=utf-8,chinese,latin-1
- if has("win32")
- set fileencoding=chinese
- else
- set fileencoding=utf-8
-endif
+set encoding=utf-8
+set fileencodings=utf-8,chinese,latin-1
+if has("win32")
+    set fileencoding=chinese
+    "处理菜单及右键菜单乱码
+    source $VIMRUNTIME/delmenu.vim
+    source $VIMRUNTIME/menu.vim
 
- "处理菜单及右键菜单乱码
- source $VIMRUNTIME/delmenu.vim
- source $VIMRUNTIME/menu.vim
-   
-"处理consle输出乱码
- language messages zh_CN.utf-8
-"中文乱码结束
+    "处理consle输出乱码
+    language messages zh_CN.utf-8 
+else
+    set fileencoding=utf-8
+endif
