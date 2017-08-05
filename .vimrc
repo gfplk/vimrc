@@ -6,17 +6,23 @@ call vundle#begin('~/.vim/bundle/')
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
-Plugin 'davidhalter/jedi-vim'
+Plugin 'vimwiki/vimwiki'
+"Plugin 'davidhalter/jedi-vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'Yggdroot/indentLine'
 Plugin 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-set nu
 syntax on
+set nu
+let python_highlight_all=1
 set sw=4 ts=4 sts=4 expandtab
 set laststatus=2
 set showcmd
@@ -43,11 +49,14 @@ set fileencoding=utf-8
 set encoding=utf-8
 let &termencoding=&encoding
 set foldmethod=indent
-color Monokai
+set termguicolors
+let g:solarized_termtrans = 1
+color solarized
 
 map <F2> :NERDTreeToggle<CR>
 nmap <F3> :TagbarToggle<CR>
 map <F5> :call Run()<CR>
+map <F6> :call Test()<CR>
 map <F11> :exec "%!xxd"<CR>
 map <F12> :exec "%!xxd -r"<CR>
 
@@ -59,11 +68,18 @@ func! Run()
             exec "!python3 %"
         endif
     endif
+endfunc
 
-    if &filetype == 'go'
-        exec "!go run %"
+func! Test()
+    if &filetype == 'python'
+        if has('win32')
+            exec "!python %'
+        else
+            exec '!python3 -m unittest %'
+        endif
     endif
 endfunc
+
 
 set encoding=utf-8
 set termencoding=utf-8
@@ -77,3 +93,7 @@ if has("win32")
 else
     set fileencoding=utf-8
 endif
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_python_binary_path = '/usr/bin/python3'
